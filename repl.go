@@ -8,8 +8,8 @@ import (
 )
 
 func startRepl() {
-
 	scanner := bufio.NewScanner(os.Stdin)
+	conf := cliConfig{}
 
 	for {
 		fmt.Print("Pokedex > ")
@@ -24,27 +24,12 @@ func startRepl() {
 
 		command, ok := getCommands()[commandName]
 		if ok {
-			if err := command.callback(); err != nil {
+			if err := command.callback(&conf); err != nil {
 				fmt.Println(err)
 			}
 		} else {
 			fmt.Println("Unknown command")
 		}
-	}
-}
-
-func getCommands() map[string]cliCommand {
-	return map[string]cliCommand{
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    commandExit,
-		},
-		"help": {
-			name:        "help",
-			description: "Display a help message",
-			callback:    commandHelp,
-		},
 	}
 }
 
