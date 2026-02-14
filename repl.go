@@ -8,6 +8,19 @@ import (
 )
 
 func startRepl() {
+	commands := map[string]cliCommand{
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
+		"help": {
+			name:        "help",
+			description: "Display a help message",
+			callback:    commandHelp,
+		},
+	}
+
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -20,7 +33,16 @@ func startRepl() {
 		}
 
 		commandName := words[0]
-		fmt.Printf("Your command was: %v\n", commandName)
+
+		command, ok := commands[commandName]
+		if ok {
+			if err := command.callback(); err != nil {
+				fmt.Println(err)
+			}
+		} else {
+			fmt.Println("Unknown command")
+		}
+
 	}
 
 }
