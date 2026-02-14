@@ -8,18 +8,6 @@ import (
 )
 
 func startRepl() {
-	commands := map[string]cliCommand{
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    commandExit,
-		},
-		"help": {
-			name:        "help",
-			description: "Display a help message",
-			callback:    commandHelp,
-		},
-	}
 
 	scanner := bufio.NewScanner(os.Stdin)
 
@@ -34,7 +22,7 @@ func startRepl() {
 
 		commandName := words[0]
 
-		command, ok := commands[commandName]
+		command, ok := getCommands()[commandName]
 		if ok {
 			if err := command.callback(); err != nil {
 				fmt.Println(err)
@@ -42,9 +30,22 @@ func startRepl() {
 		} else {
 			fmt.Println("Unknown command")
 		}
-
 	}
+}
 
+func getCommands() map[string]cliCommand {
+	return map[string]cliCommand{
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
+		"help": {
+			name:        "help",
+			description: "Display a help message",
+			callback:    commandHelp,
+		},
+	}
 }
 
 func cleanInput(text string) []string {
