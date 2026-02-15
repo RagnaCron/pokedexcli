@@ -8,12 +8,13 @@ import (
 	"time"
 
 	"github.com/RagnaCron/pokedexcli/internal/pokecache"
+	"github.com/RagnaCron/pokedexcli/internal/pokecommand"
 )
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
-	conf := cliConfig{
-		cache: pokecache.NewCache(10 * time.Minute),
+	conf := pokecommand.Config{
+		Cache: pokecache.NewCache(10 * time.Minute),
 	}
 
 	for {
@@ -31,9 +32,9 @@ func startRepl() {
 			args = words[1:]
 		}
 
-		command, ok := getCommands()[commandName]
+		command, ok := pokecommand.Get()[commandName]
 		if ok {
-			if err := command.callback(&conf, args...); err != nil {
+			if err := command.Callback(&conf, args...); err != nil {
 				fmt.Println(err)
 			}
 		} else {
