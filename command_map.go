@@ -6,7 +6,7 @@ import (
 	"github.com/RagnaCron/pokedexcli/internal/pokeapi"
 )
 
-func commandMap(conf *cliConfig) error {
+func commandMap(conf *cliConfig, para string) error {
 	resource, err := pokeapi.GetLocations(conf.next, conf.cache)
 	if err != nil {
 		return err
@@ -20,7 +20,7 @@ func commandMap(conf *cliConfig) error {
 	return nil
 }
 
-func commandMapb(conf *cliConfig) error {
+func commandMapb(conf *cliConfig, para string) error {
 	if conf.previous == nil {
 		return errors.New("you're on the first page")
 	}

@@ -13,7 +13,7 @@ import (
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
 	conf := cliConfig{
-		cache: pokecache.NewCache(10 * time.Second),
+		cache: pokecache.NewCache(10 * time.Minute),
 	}
 
 	for {
@@ -27,9 +27,14 @@ func startRepl() {
 
 		commandName := words[0]
 
+		var para string
+		if len(words) == 2 {
+			para = words[1]
+		}
+
 		command, ok := getCommands()[commandName]
 		if ok {
-			if err := command.callback(&conf); err != nil {
+			if err := command.callback(&conf, para); err != nil {
 				fmt.Println(err)
 			}
 		} else {

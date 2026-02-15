@@ -11,16 +11,11 @@ type cliConfig struct {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*cliConfig) error
+	callback    func(*cliConfig, string) error
 }
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    commandExit,
-		},
 		"help": {
 			name:        "help",
 			description: "Display a help message",
@@ -35,6 +30,16 @@ func getCommands() map[string]cliCommand {
 			name:        "mapb",
 			description: "Get the previous page of locations",
 			callback:    commandMapb,
+		},
+		"explore": {
+			name:        "explore",
+			description: "List of all the Pokemon in a location area",
+			callback:    commandExplore,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
 		},
 	}
 }
