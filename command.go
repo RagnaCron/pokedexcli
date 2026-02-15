@@ -1,8 +1,11 @@
 package main
 
+import "github.com/RagnaCron/pokedexcli/internal/pokecache"
+
 type cliConfig struct {
-	previous string
-	next     string
+	previous *string
+	next     *string
+	cache    *pokecache.Cache
 }
 
 type cliCommand struct {
@@ -25,12 +28,12 @@ func getCommands() map[string]cliCommand {
 		},
 		"map": {
 			name:        "map",
-			description: "Display the next names of 20 location areas in the Pokemon world",
+			description: "Get the next page of locations",
 			callback:    commandMap,
 		},
 		"mapb": {
 			name:        "mapb",
-			description: "Display the previous names of 20 location areas in the Pokemon world",
+			description: "Get the previous page of locations",
 			callback:    commandMapb,
 		},
 	}

@@ -5,11 +5,16 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
+
+	"github.com/RagnaCron/pokedexcli/internal/pokecache"
 )
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
-	conf := cliConfig{}
+	conf := cliConfig{
+		cache: pokecache.NewCache(10 * time.Second),
+	}
 
 	for {
 		fmt.Print("Pokedex > ")
