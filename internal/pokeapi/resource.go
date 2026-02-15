@@ -1,0 +1,20 @@
+package pokeapi
+
+import "fmt"
+
+type Locations struct {
+	Count    int     `json:"count"`
+	Next     *string `json:"next"`
+	Previous *string `json:"previous"`
+	Results  []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"results"`
+}
+
+func (r Locations) PrintResults() {
+	for _, location := range r.Results {
+		fmt.Println(location.Name)
+	}
+
+}

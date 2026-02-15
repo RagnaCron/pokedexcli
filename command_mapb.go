@@ -1,11 +1,9 @@
 package main
 
-import (
-	"github.com/RagnaCron/pokedexcli/internal/pokeapi"
-)
+import "github.com/RagnaCron/pokedexcli/internal/pokeapi"
 
-func commandMap(conf *cliConfig) error {
-	resource, err := pokeapi.GetMap(conf.next)
+func commandMapb(conf *cliConfig) error {
+	resource, err := pokeapi.GetMap(conf.previous)
 	if err != nil {
 		return err
 	}
