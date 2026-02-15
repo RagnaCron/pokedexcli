@@ -22,7 +22,7 @@ func Get(url string, cache *pokecache.Cache) ([]byte, error) {
 
 	body, err = io.ReadAll(res.Body)
 	if res.StatusCode > 299 {
-		return nil, fmt.Errorf("Response failed with status code: %d and\nbody: %s\n", res.StatusCode, body)
+		return nil, fmt.Errorf("Response failed with status code: %v and\nbody: %v\n", res.StatusCode, body)
 	}
 	if err != nil {
 		return nil, err
