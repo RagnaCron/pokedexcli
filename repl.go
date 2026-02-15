@@ -26,15 +26,14 @@ func startRepl() {
 		}
 
 		commandName := words[0]
-
-		var para string
-		if len(words) == 2 {
-			para = words[1]
+		args := []string{}
+		if len(words) > 1 {
+			args = words[1:]
 		}
 
 		command, ok := getCommands()[commandName]
 		if ok {
-			if err := command.callback(&conf, para); err != nil {
+			if err := command.callback(&conf, args...); err != nil {
 				fmt.Println(err)
 			}
 		} else {
