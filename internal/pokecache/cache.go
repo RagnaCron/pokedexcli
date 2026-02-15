@@ -12,14 +12,14 @@ type cacheEntry struct {
 
 type Cache struct {
 	entries  map[string]cacheEntry
-	mux      sync.RWMutex
+	mux      *sync.RWMutex
 	interval time.Duration
 }
 
 func NewCache(interval time.Duration) *Cache {
 	cache := &Cache{
 		entries:  make(map[string]cacheEntry),
-		mux:      sync.RWMutex{},
+		mux:      &sync.RWMutex{},
 		interval: interval,
 	}
 
