@@ -40,6 +40,11 @@ func Get() map[string]Command {
 			Description: "Inspect a caught Pokemon in the Pokedex",
 			Callback:    commandInspect,
 		},
+		"pokedex": {
+			Name:        "pokedex",
+			Description: "List caught Pokemons",
+			Callback:    commandPokedex,
+		},
 		"map": {
 			Name:        "map",
 			Description: "Get the next page of locations",
