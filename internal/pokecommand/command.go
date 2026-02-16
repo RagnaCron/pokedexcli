@@ -42,7 +42,7 @@ func Get() map[string]Command {
 		},
 		"pokedex": {
 			Name:        "pokedex",
-			Description: "List caught Pokemons",
+			Description: "See all the Pokemon you've caught",
 			Callback:    commandPokedex,
 		},
 		"map": {

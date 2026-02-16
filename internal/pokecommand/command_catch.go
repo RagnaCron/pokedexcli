@@ -30,6 +30,7 @@ func catch(conf *Config, pokemon *pokeapi.Pokemon) {
 	canCatch := attempt(pokemon.BaseExperience)
 	if canCatch {
 		fmt.Printf("%s was caught!\n", pokemon.Name)
+		fmt.Println("You may now inspect it with the inspect command.")
 		conf.Pokedex[pokemon.Name] = *pokemon
 	} else {
 		fmt.Printf("%s escaped!\n", pokemon.Name)
