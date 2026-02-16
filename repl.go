@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/RagnaCron/pokedexcli/internal/pokeapi"
 	"github.com/RagnaCron/pokedexcli/internal/pokecache"
 	"github.com/RagnaCron/pokedexcli/internal/pokecommand"
 )
@@ -14,7 +15,8 @@ import (
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
 	conf := pokecommand.Config{
-		Cache: pokecache.NewCache(10 * time.Minute),
+		Cache:   pokecache.NewCache(10 * time.Minute),
+		Pokedex: make(map[string]pokeapi.Pokemon),
 	}
 
 	for {

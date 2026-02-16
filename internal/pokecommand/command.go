@@ -1,11 +1,15 @@
 package pokecommand
 
-import "github.com/RagnaCron/pokedexcli/internal/pokecache"
+import (
+	"github.com/RagnaCron/pokedexcli/internal/pokeapi"
+	"github.com/RagnaCron/pokedexcli/internal/pokecache"
+)
 
 type Config struct {
 	Previous *string
 	Next     *string
 	Cache    *pokecache.Cache
+	Pokedex  map[string]pokeapi.Pokemon
 }
 
 type Command struct {
@@ -25,6 +29,11 @@ func Get() map[string]Command {
 			Name:        "explore <location_name>",
 			Description: "Explore a location",
 			Callback:    commandExplore,
+		},
+		"catch": {
+			Name:        "catch <pokemon_name>",
+			Description: "Catch a Pokemon",
+			Callback:    commandCatch,
 		},
 		"map": {
 			Name:        "map",
